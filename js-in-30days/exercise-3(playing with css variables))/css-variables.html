@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<head>
+    <title>CSS variables</title>
+    <style>
+        :root{
+            --base: blue;
+            --blur: 0px;
+            --spacing:10px;
+        }
+        body{
+            max-height: 100vh;
+            height: 100vh;
+            padding: 0;
+            margin: 0;
+        }
+
+        img{
+            padding: var(--spacing);
+            filter:blur(var(--blur));
+            background: var(--base);
+        }
+        .controls{
+            max-width: 50vw;
+            width: 40vw;
+            float: left;
+            margin-top: 40vh;
+            font-size: 1.9em;
+            color: var(--base);
+        }
+        .container{
+            margin: 1%;
+            float: left;
+            width: 50vw;
+            max-width: 50vw;
+        }
+    </style>
+</head>
+<body>
+    <div class="controls">
+        <label for="spacing">Spacing:</label>
+        <input type="range" name="spacing" value="10" min="10" max="80" data-sizing="px">
+
+        <label for="blur">Blur:</label>
+        <input type="range" name="blur" value="1" min="0" max="10" data-sizing="px">
+
+        <label for="base">Base color:</label>
+        <input type="color" name="base" value="blue">
+    </div>
+    <div class="container">
+        <img src="images/cap.jpg">
+    </div>
+    <script>
+        const inputs = document.querySelectorAll('.controls input');
+
+        function updateControls() {
+            const suffix = this.dataset.sizing || '';
+            document.documentElement.style.setProperty(`--${this.name}`, this.value + suffix)
+        }
+
+        inputs.forEach(input => input.addEventListener('change', updateControls));
+    </script>
+</body>
+</html>
