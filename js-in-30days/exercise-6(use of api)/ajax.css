@@ -1,0 +1,41 @@
+body{
+    margin: 0;
+    padding: 0;
+    justify-content: center;
+    background-color: #d4ebd0;
+}
+.inputs{
+    justify-content: center;
+    text-align: center;
+    margin-top: 20%;
+    width:100%;
+}
+#input{
+    width: 40%;
+    border-radius: 20px;
+    padding: 0.8%;
+    padding-bottom: 0;
+    border: 2px solid #fe346e;
+    font-size: 1.8rem;
+    outline: none;
+}
+.suggestions{
+    list-style-type:none;
+    width: 30%;
+    margin-left: 33%;
+    margin-top: -0.01%;
+}
+.suggestions > li{
+    border: 1px solid #00bdaa;
+    text-decoration: none;
+}
+.hl{
+    background-color: #fe346e;
+}
+span.name{
+    font-size: 2rem;
+}
+span.population{
+    font-size:2rem;
+    margin-left: 3%;
+}

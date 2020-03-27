@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<head>
+    <title>Ajax</title>
+    <link href="ajax.css" rel="stylesheet">
+</head>
+<body>
+    <div class="inputs">
+        <input type="text" name="input" id="input" placeholder="Search for state or city">
+        <ul class="suggestions">
+            <li>Filter for a city</li>
+            <li>or state</li>
+        </ul>
+    </div>
+    <script>
+        const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+        const cities = [];
+
+        fetch(endpoint)
+            .then(blob => blob.json())
+            .then(data => cities.push(...data))
+        
+        const inputs = document.querySelector('#input');
+        const suggestions = document.querySelector('.suggestions');
+
+        inputs.addEventListener('change',displayMatches);
+        inputs.addEventListener('keyup', displayMatches);
+
+        function findMatches(searchItem, cities){
+            return cities.filter(search => {
+                const regex = new RegExp(searchItem, 'gi');
+                return search.city.match(regex) || search.state.match(regex)
+            });
+        }
+
+        function numberComma(x){
+            return x.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+        };
+
+        function displayMatches(){
+            const matchArray = findMatches(this.value, cities);
+            const html = matchArray.map(search =>{
+                const regex = new RegExp(this.value, 'gi');
+                const cityName = search.city.replace(regex,`<span class="hl">${this.value}</span>`);
+                const stateName = search.state.replace(regex,`<span class="hl">${this.value}</span>`);
+
+                return `
+                <li>
+                <span class="name">${cityName}, ${stateName}</span>
+                <span class="population">&nbsp;${numberComma(search.population)}</span>
+                </li>
+                `
+            }).join('')
+            suggestions.innerHTML = html
+        }
+    </script>
+</body>
+</html>
