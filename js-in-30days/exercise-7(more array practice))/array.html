@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<head>
+    <title>Array</title>
+</head>
+<body>
+    <script>
+      const people = [
+      { name: 'Wes', year: 1988 },
+      { name: 'Kait', year: 1986 },
+      { name: 'Irv', year: 1970 },
+      { name: 'Lux', year: 2015 }
+    ];
+
+    const comments = [
+      { text: 'Love this!', id: 523423 },
+      { text: 'Super good', id: 823423 },
+      { text: 'You are the best', id: 2039842 },
+      { text: 'Ramen is my fav food ever', id: 123523 },
+      { text: 'Nice Nice Nice!', id: 542328 }
+    ];
+
+    const age = people.some(people => {
+        const now = new Date();
+        const current = now.getUTCFullYear();
+        console.log(current)
+        if((current - people.year) >= 19){
+            return true;
+        }
+    })
+    console.log(age);
+
+    const checker = people.every(people => {
+        if((new Date().getUTCFullYear() - people.year) >= 19) return true;
+    })
+    console.log(checker);
+
+    const idChecker = comments.find(comment => comment.id === 823423);
+    console.log(idChecker);
+
+    const check = comments.findIndex(comment => comment.id === 823423);
+    console.log(check);
+
+    const newComment =[
+        ...comments.slice(0,check),
+        ...comments.slice(check + 1)
+    ];
+    console.table(newComment);
+    </script>
+</body>
+</html>
