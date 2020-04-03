@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<head>
+    <title>Selection</title>
+    <style>
+        body{
+            padding: 0;
+            margin: 0;
+            background-color: #aeefec;
+        }
+        .boxes{
+            text-align: center;
+            margin-top: 8%;
+        }
+        .box{
+            font-size: 2em;
+        }
+        .labels{
+            margin-left: 2%;
+            line-height: 15%;
+            color: #fe346e;
+        }
+        input[type="checkbox"]{
+            zoom: 2;
+            outline: none;
+            margin-top: 1%;
+        }
+        .heading{
+            text-align: center;
+            font-size: 3em;
+            color: #f64b3c;
+        }
+    </style>
+</head>
+<body>
+    <h1 class="heading">Please press shift for multiple selection in between !!!</h1>
+    <div class="boxes">
+        <div class="box">
+            <input type="checkbox" id="box1"><label class="labels" for="box1">this is box 1.</label>
+        </div>
+        <div class="box">
+            <input type="checkbox" id="box2"><label class="labels" for="box2">this is box 2.</label>
+        </div>
+        <div class="box">
+            <input type="checkbox" id="box3"><label class="labels" for="box3">this is box 3.</label>
+        </div>
+        <div class="box">
+            <input type="checkbox" id="box4"><label class="labels" for="box4">this is box 4.</label>
+        </div>
+        <div class="box">
+            <input type="checkbox" id="box5"><label class="labels" for="box5">this is box 5.</label>
+        </div>
+        <div class="box">
+            <input type="checkbox" id="box6"><label class="labels" for="box6">this is box 6.</label>
+        </div>
+    </div>
+
+    <script>
+      const boxes = document.querySelectorAll('.boxes input[type="checkbox"]');
+      boxes.forEach(box => box.addEventListener('click', selection));
+      let lastChecked;
+
+      function selection(e){
+          let isBetween = false;
+          if(e.shiftKey && this.checked){
+              boxes.forEach(box=>{
+                  if(box === this || box === lastChecked){
+                      isBetween = !isBetween
+                  };
+                  if(isBetween){
+                      box.checked = true;
+                  };
+              })
+          }
+          lastChecked = this;
+      }
+    </script>
+</body>
+</html>
