@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<head>
+  <title>Konami Code</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      height: 100vh;
+    }
+    .main{
+      outline: none;
+      text-align: center;
+      padding-top: 10%;
+    }
+    #key{
+      padding: 1%;
+    }
+  </style>
+</head>
+<body>
+  <div class="main">
+    <input type="text" id="key" style="font-size: 3em;" placeholder="Press the key to check">
+  </div>
+  <script>
+    const key = document.querySelector('#key');
+    const pressedKey = [];
+    const secretKey = 'ishan';
+    key.addEventListener('keyup',(e)=>{
+      pressedKey.push(e.key);
+      pressedKey.splice(-secretKey.length -1, pressedKey.length - secretKey.length);
+
+      if(pressedKey.join('').includes(secretKey)){
+        cornify_add();
+      }
+    })
+  </script>
+</body>
+
+</html>
